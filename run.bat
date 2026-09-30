@@ -22,7 +22,7 @@ if exist "requirements.txt" (
 )
 
 echo Запуск приложения.
-python ./src/main.py
+python ./src/main.py %*
 
 :end
 echo.

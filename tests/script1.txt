@@ -1,0 +1,9 @@
+# rstiaenrs
+# cd rstiaenrs
+cd as ast
+
+
+"ls 'ars"' ars
+ls "asrt TS" # rsatasrt asrt
+
+arsnti sraten sraten
