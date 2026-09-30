@@ -1,0 +1,9 @@
+cd rsatasrt
+
+ls sraten
+"cd" sraten
+"cd sra" asrt
+
+ls
+exit
+ls
