@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 > nul
 
-if not exist "venv" (
+if not exist ".venv" (
     echo Создание .venv
     python -m venv .venv
     if errorlevel 1 (
