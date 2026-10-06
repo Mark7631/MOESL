@@ -41,7 +41,7 @@ def program_args():
     """Обрабатывает аргументы запуска приложения"""
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--vfc-path", required=True)
+    parser.add_argument("--vfs-path", required=True)
     parser.add_argument("--cmd-promt", required=False)
     parser.add_argument("--log-path", required=False)
     parser.add_argument("--strt-scr-path", required=False)
@@ -52,7 +52,7 @@ def program_args():
 def init_shell_data():
     """Инициализирует данные для программы"""
     args = program_args()
-    data = ShellData(vfs_path=args.vfc_path)
+    data = ShellData(vfs_path=args.vfs_path)
     if args.cmd_promt is not None:
         data.cmd_promt = args.cmd_promt
     if args.log_path is not None:
