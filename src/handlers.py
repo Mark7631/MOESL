@@ -50,8 +50,11 @@ class CmdHandler():
 
 
 class ScriptHandler:
-    def process(self, line):
+    def process(self, line: str):
         """Контролирует процесс обработки команды из скрипта"""
+        if "#" in line:
+            line = line.split('#')[0].strip()
+
         try:
             parsed_line = self._parse(line)
         except ValueError as err:
@@ -71,14 +74,8 @@ class ScriptHandler:
         for i in range(0, len(parsed_args)):
             if " " in parsed_args[i]:
                 parsed_args[i] = "\"" + parsed_args[i] + "\""
-        out_s = ""
-        if parsed_args[0] != "#" or parsed_args[i].startswith("#"):
-            out_s += parsed_args[0]
-        else:
-            return ""
-        
+
+        out_s = parsed_args[0]    
         for i in range(1, len(parsed_args)):
-            if parsed_args[i] == "#" or parsed_args[i].startswith("#"):
-                return out_s
             out_s += f" {parsed_args[i]}"
         return out_s

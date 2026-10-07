@@ -5,5 +5,4 @@ ls sraten
 "cd sra" asrt
 
 ls
-exit
 ls

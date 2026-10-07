@@ -35,6 +35,13 @@ class ShellData:
     def get_window_title(self):
         """Возвращает заголовок окна на основе реальных данных ОС"""
         return f"Эмулятор - [{self.user}@{self.machine}]"
+    
+
+@dataclass
+class StartScriptError:
+    """Класс для ошибок исполнения стартового скрипта"""
+    cmd: str
+    err: str
 
 
 def program_args():
@@ -137,16 +144,30 @@ class App(QMainWindow, Ui_MainWindow):
     def _strt_scr_run(self):
         """Функция для выполнения стартовых скриптов"""
         file_path = Path(self.data.strt_scr_path)
+        errs = []
 
         with file_path.open("r", encoding="utf-8") as file:
             for line in file:
                 cmd = self.script_handler.process(line.strip())
                 if isinstance(cmd, ValueError):
                     self.cmd_line.setText(line.strip())
-                    self._enter()
+                    errs.append(StartScriptError(line.strip(), str(cmd)))
                 elif cmd != "":
                     self.cmd_line.setText(cmd)
-                    self._enter()
+                    cmd_result = self.cmd_handler.process(cmd)
+                    if cmd_result.type == "error":
+                        errs.append(StartScriptError(line.strip(),
+                                                     cmd_result.text))
+                self._enter()
+
+        if (len(errs) != 0):
+            self.out_window.append("-----------------------")
+            self.out_window.append("Errors during execution:")
+            for i in range(len(errs)):
+                err = errs[i]
+                self.out_window.append(f"{i + 1}) {err.cmd}")
+                self.out_window.append(err.err)
+            self.out_window.append("-----------------------")
 
 
 def exit_app():
