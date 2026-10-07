@@ -112,7 +112,6 @@ class App(QMainWindow, Ui_MainWindow):
         self._log([datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                   self.cmd_line.text()])
         cmd_result = self.cmd_handler.process(self.cmd_line.text())
-        print(cmd_result)
         match cmd_result.type:
             case "text_only":
                 self.out_window.append(self._get_standart_out(cmd_result.text))
