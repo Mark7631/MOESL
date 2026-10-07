@@ -72,13 +72,13 @@ class ScriptHandler:
             if " " in parsed_args[i]:
                 parsed_args[i] = "\"" + parsed_args[i] + "\""
         out_s = ""
-        if parsed_args[0] != "#":
+        if parsed_args[0] != "#" or parsed_args[i].startswith("#"):
             out_s += parsed_args[0]
         else:
             return ""
         
         for i in range(1, len(parsed_args)):
-            if parsed_args[i] == "#":
+            if parsed_args[i] == "#" or parsed_args[i].startswith("#"):
                 return out_s
             out_s += f" {parsed_args[i]}"
         return out_s
